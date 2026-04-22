@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>XO Game</title>
+  <style>
+    body { font-family: Arial, sans-serif; text-align: center; }
+    .board { display: grid; grid-template-columns: repeat(3, 60px); gap: 5px; margin: 20px auto; }
+    .cell { width: 60px; height: 60px; border: 1px solid #000; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; }
+    .cell:hover { background-color: #f0f0f0; }
+    button { margin: 10px; padding: 10px 20px; }
+  </style>
+</head>
+<body>
+  <h1>XO Game</h1>
+  <div id="status">Loading...</div>
+  <div class="board" id="board"></div>
+  <button onclick="initializeGame()">New Game</button>
+  <button onclick="loadBoard()">Refresh</button>
+
+  <script>
+    let currentPlayer = 'X';
+    let status = 'Ongoing';
+
+    function initializeGame() {
+      google.script.run.initializeBoard();
+      loadBoard();
+    }
+
+    function loadBoard() {
+      google.script.run.withSuccessHandler(function(data) {
+        const board = data.board;
+        const boardDiv = document.getElementById('board');
+        boardDiv.innerHTML = '';
+        for (let i = 0; i < 3; i++) {
+          for (let j = 0; j < 3; j++) {
+            const cell = document.createElement('div');
+            cell.className = 'cell';
+            cell.textContent = board[i][j];
+            cell.onclick = () => makeMove(i, j);
+            boardDiv.appendChild(cell);
+          }
+        }
+        currentPlayer = data.currentPlayer;
+        status = data.status;
+        document.getElementById('status').textContent = 'Current Player: ' + currentPlayer + ' | Status: ' + status;
+      }).getBoard();
+    }
+
+    function makeMove(row, col) {
+      if (status !== 'Ongoing') return;
+      google.script.run.withSuccessHandler(function(result) {
+        if (result.success) {
+          loadBoard();
+        } else {
+          alert(result.message);
+        }
+      }).makeMove(row, col);
+    }
+
+    window.onload = loadBoard;
+  </script>
+</body>
+</html>
