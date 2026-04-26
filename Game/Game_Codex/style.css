@@ -1,0 +1,440 @@
+:root {
+--bg-1: #08101f;
+--bg-2: #11284a;
+--panel: rgba(9, 17, 36, 0.78);
+--panel-border: rgba(124, 192, 255, 0.28);
+--text: #eef5ff;
+--muted: #a9bdd7;
+--primary: #39b7ff;
+--primary-dark: #1886d0;
+--danger: #ff5d7f;
+--success: #40df9b;
+--energy-a: #53f2ff;
+--energy-b: #2ea2ff;
+--shadow: 0 14px 34px rgba(1, 8, 17, 0.45);
+}
+
+
+box-sizing border-box
+
+html,
+body {
+margin: 0;
+min-height: 100%;
+font-family: "Exo 2", sans-serif;
+color: var(--text);
+background:
+radial-gradient(circle at 20% 18%, rgba(61, 180, 255, 0.22), transparent 32%),
+radial-gradient(circle at 78% 76%, rgba(37, 227, 154, 0.18), transparent 36%),
+linear-gradient(145deg, var(--bg-1), var(--bg-2));
+}
+
+body {
+display: grid;
+place-items: center;
+padding: clamp(8px, 1.8vw, 24px);
+}
+
+.app-shell {
+width: min(1260px, 100%);
+min-height: min(92vh, 850px);
+border-radius: 24px;
+border: 1px solid rgba(150, 207, 255, 0.24);
+background: linear-gradient(160deg, rgba(7, 14, 28, 0.88), rgba(6, 17, 33, 0.72));
+backdrop-filter: blur(8px);
+box-shadow: var(--shadow);
+position: relative;
+overflow: hidden;
+}
+
+.app-shell::before,
+.app-shell::after {
+content: "";
+position: absolute;
+width: 360px;
+height: 360px;
+border-radius: 50%;
+pointer-events: none;
+}
+
+.app-shell::before {
+top: -140px;
+right: -90px;
+background: radial-gradient(circle, rgba(57, 183, 255, 0.28), transparent 68%);
+}
+
+.app-shell::after {
+bottom: -180px;
+left: -120px;
+background: radial-gradient(circle, rgba(57, 255, 192, 0.24), transparent 68%);
+}
+
+.scene {
+position: absolute;
+inset: 0;
+display: grid;
+place-items: center;
+padding: clamp(18px, 2.2vw, 28px);
+opacity: 0;
+visibility: hidden;
+transform: translateY(12px) scale(0.985);
+transition: opacity 320ms ease, transform 320ms ease, visibility 0ms linear 320ms;
+}
+
+.scene.active {
+opacity: 1;
+visibility: visible;
+transform: translateY(0) scale(1);
+transition: opacity 320ms ease, transform 320ms ease;
+}
+
+.panel {
+width: min(760px, 100%);
+border: 1px solid var(--panel-border);
+border-radius: 20px;
+background: var(--panel);
+padding: clamp(24px, 3vw, 36px);
+box-shadow: 0 12px 40px rgba(2, 9, 22, 0.45);
+}
+
+.lobby-panel,
+.gameover-panel {
+text-align: center;
+}
+
+.game-title {
+margin: 0;
+font-family: "Oxanium", sans-serif;
+font-size: clamp(2rem, 5vw, 3.8rem);
+letter-spacing: 0.06em;
+text-transform: uppercase;
+}
+
+.game-subtitle {
+margin: 10px 0 18px;
+color: var(--muted);
+}
+
+.selected-level {
+margin-top: 0;
+color: #d2e6ff;
+font-weight: 600;
+}
+
+.menu-actions {
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 12px;
+}
+
+.btn {
+border: 0;
+border-radius: 14px;
+padding: 12px 22px;
+font-size: 0.98rem;
+font-weight: 700;
+letter-spacing: 0.02em;
+color: white;
+cursor: pointer;
+transition: transform 120ms ease, filter 180ms ease, box-shadow 180ms ease;
+box-shadow: 0 6px 16px rgba(5, 13, 25, 0.32);
+}
+
+.btn:hover {
+transform: translateY(-1px);
+filter: brightness(1.07);
+}
+
+.btn:active {
+transform: translateY(1px) scale(0.98);
+}
+
+.btn-primary {
+background: linear-gradient(155deg, #4fd3ff, #1889d5);
+}
+
+.btn-secondary {
+background: linear-gradient(155deg, #4be6a4, #1fae72);
+}
+
+.btn-ghost {
+background: linear-gradient(165deg, rgba(100, 158, 225, 0.22), rgba(120, 187, 247, 0.1));
+border: 1px solid rgba(145, 197, 250, 0.34);
+}
+
+.btn.small {
+padding: 10px 16px;
+font-size: 0.9rem;
+}
+
+.levels-panel h2 {
+margin-top: 0;
+text-align: center;
+}
+
+.level-grid {
+display: grid;
+grid-template-columns: repeat(3, minmax(160px, 1fr));
+gap: 12px;
+margin-bottom: 22px;
+}
+
+.level-card {
+border: 1px solid rgba(145, 204, 255, 0.28);
+border-radius: 14px;
+background: linear-gradient(165deg, rgba(38, 69, 117, 0.55), rgba(27, 47, 82, 0.35));
+color: var(--text);
+text-align: left;
+padding: 14px;
+display: grid;
+gap: 8px;
+cursor: pointer;
+transition: transform 150ms ease, border-color 150ms ease, background 220ms ease;
+}
+
+.level-card strong {
+font-size: 1.07rem;
+}
+
+.level-card span {
+color: var(--muted);
+font-size: 0.88rem;
+}
+
+.level-card:hover {
+transform: translateY(-2px);
+border-color: rgba(95, 195, 255, 0.7);
+}
+
+.level-card.active {
+border-color: rgba(78, 220, 255, 0.95);
+background: linear-gradient(165deg, rgba(43, 134, 198, 0.55), rgba(24, 87, 148, 0.45));
+}
+
+.game-shell {
+width: min(1220px, 100%);
+display: grid;
+gap: 12px;
+}
+
+.hud-top {
+border-radius: 16px;
+border: 1px solid rgba(140, 199, 255, 0.28);
+background: rgba(9, 18, 38, 0.75);
+display: grid;
+grid-template-columns: repeat(3, minmax(0, 1fr));
+gap: 16px;
+padding: 12px 16px;
+}
+
+.base-hp-group,
+.energy-group {
+display: grid;
+gap: 6px;
+}
+
+.label {
+color: var(--muted);
+font-size: 0.84rem;
+text-transform: uppercase;
+letter-spacing: 0.08em;
+}
+
+.value {
+font-weight: 700;
+font-size: 0.93rem;
+}
+
+.hp-track,
+.energy-track {
+width: 100%;
+height: 16px;
+border-radius: 99px;
+background: rgba(10, 18, 35, 0.94);
+border: 1px solid rgba(147, 208, 255, 0.26);
+overflow: hidden;
+position: relative;
+}
+
+.hp-fill,
+.energy-fill {
+position: absolute;
+left: 0;
+top: 0;
+bottom: 0;
+width: 100%;
+transition: width 220ms ease;
+}
+
+.hp-fill.player {
+background: linear-gradient(90deg, #52f4b0, #2bcf8e);
+}
+
+.hp-fill.enemy {
+background: linear-gradient(90deg, #ff9a7b, #ff5b86);
+}
+
+.energy-fill {
+background: linear-gradient(90deg, var(--energy-a), var(--energy-b));
+}
+
+.energy-glow {
+position: absolute;
+inset: -1px;
+border-radius: inherit;
+pointer-events: none;
+box-shadow: inset 0 0 14px rgba(88, 240, 255, 0.32);
+}
+
+.canvas-wrap {
+position: relative;
+border-radius: 20px;
+overflow: hidden;
+border: 1px solid rgba(138, 198, 255, 0.3);
+box-shadow: inset 0 0 0 1px rgba(191, 229, 255, 0.08);
+}
+
+#game-canvas {
+display: block;
+width: 100%;
+height: min(58vh, 540px);
+background: linear-gradient(180deg, #92d9ff 0%, #8ec5ff 34%, #a6deff 45%, #89c8ff 55%, #4983c0 100%);
+}
+
+.level-chip {
+position: absolute;
+top: 12px;
+left: 12px;
+border-radius: 99px;
+padding: 8px 12px;
+font-size: 0.8rem;
+font-weight: 700;
+background: rgba(8, 19, 41, 0.75);
+border: 1px solid rgba(140, 197, 255, 0.35);
+}
+
+.hud-bottom {
+border-radius: 16px;
+border: 1px solid rgba(140, 199, 255, 0.28);
+background: rgba(9, 18, 38, 0.75);
+display: flex;
+justify-content: space-between;
+align-items: center;
+gap: 10px;
+padding: 10px;
+}
+
+.unit-buttons {
+display: grid;
+grid-template-columns: repeat(4, minmax(0, 1fr));
+gap: 8px;
+flex: 1;
+}
+
+.unit-btn {
+position: relative;
+border-radius: 12px;
+border: 1px solid rgba(143, 202, 255, 0.35);
+background: linear-gradient(168deg, rgba(36, 67, 112, 0.75), rgba(18, 40, 74, 0.88));
+color: #eff7ff;
+padding: 9px;
+text-align: left;
+cursor: pointer;
+transition: transform 120ms ease, filter 160ms ease, border-color 180ms ease;
+}
+
+.unit-btn:hover {
+transform: translateY(-1px);
+filter: brightness(1.07);
+border-color: rgba(107, 209, 255, 0.82);
+}
+
+.unit-btn:active {
+transform: translateY(1px);
+}
+
+.unit-btn.insufficient {
+animation: pulse-denied 240ms ease;
+}
+
+.unit-btn.locked {
+filter: grayscale(0.4) brightness(0.7);
+}
+
+.unit-name {
+font-size: 0.84rem;
+font-weight: 700;
+}
+
+.unit-meta {
+margin-top: 2px;
+color: #a9c6e7;
+font-size: 0.72rem;
+}
+
+.unit-cost {
+color: #7bedff;
+font-weight: 700;
+}
+
+.cooldown-mask {
+position: absolute;
+inset: 0;
+border-radius: inherit;
+background: linear-gradient(180deg, rgba(4, 8, 20, 0.03), rgba(3, 7, 18, 0.78));
+transform-origin: bottom;
+transform: scaleY(0);
+pointer-events: none;
+}
+
+.cooldown-text {
+position: absolute;
+right: 8px;
+top: 8px;
+font-size: 0.72rem;
+font-weight: 700;
+color: #ffe3ae;
+opacity: 0;
+}
+
+.gameover-panel h2 {
+margin: 0;
+font-size: clamp(2rem, 4.5vw, 3rem);
+font-family: "Oxanium", sans-serif;
+}
+
+.gameover-panel p {
+color: var(--muted);
+margin-bottom: 24px;
+}
+
+@keyframes pulse-denied {
+0% { transform: scale(1); }
+50% { transform: scale(0.96); }
+100% { transform: scale(1); }
+}
+
+@media (max-width: 920px) {
+.level-grid {
+grid-template-columns: 1fr;
+}
+
+.hud-top {
+grid-template-columns: 1fr;
+gap: 10px;
+}
+
+.hud-bottom {
+flex-direction: column;
+align-items: stretch;
+}
+
+.unit-buttons {
+grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+#game-canvas {
+height: min(46vh, 440px);
+}
+}

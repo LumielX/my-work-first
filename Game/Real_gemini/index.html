@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Car Game - Visuals Update</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="hud">
+        <div class="top-row">
+            <div class="speed-container">
+                <span id="speedDisplay">0</span>
+                <span class="unit">KM/H</span>
+            </div>
+            <div class="gear-container">
+                <span id="gearDisplay">1</span>
+            </div>
+        </div>
+        <div class="rpm-bg">
+            <div id="rpmBar" class="rpm-fill"></div>
+        </div>
+        <div class="hint">Press 'T' for Day/Night</div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

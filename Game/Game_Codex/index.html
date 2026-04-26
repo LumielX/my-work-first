@@ -1,0 +1,76 @@
+<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8" /> <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <title>Skyline Rangers: Side Defense</title> <link rel="preconnect" href="https://fonts.googleapis.com" /> <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin /> <link href="https://fonts.googleapis.com/css2?family=Exo+2:wght@400;600;700;800&family=Oxanium:wght@500;700&display=swap" rel="stylesheet" /> <link rel="stylesheet" href="style.css" /> </head> <body> <div id="app" class="app-shell"> <div class="scene active" id="scene-lobby"> <div class="panel lobby-panel"> <h1 class="game-title">Skyline Rangers</h1> <p class="game-subtitle">Neon side-scrolling tower defense</p> <p class="selected-level">Selected Level: <span id="selected-level-label">Easy</span></p> <div class="menu-actions"> <button id="btn-start" class="btn btn-primary">Start Game</button> <button id="btn-levels" class="btn btn-secondary">Level Select</button> </div> </div> </div>
+<div class="scene" id="scene-levels">
+  <div class="panel levels-panel">
+    <h2>Choose Your Mission</h2>
+    <div class="level-grid" id="level-grid">
+      <button class="level-card" data-level="easy">
+        <strong>Easy</strong>
+        <span>Relaxed pace, lower enemy health.</span>
+      </button>
+      <button class="level-card" data-level="medium">
+        <strong>Medium</strong>
+        <span>Balanced challenge with scaling pressure.</span>
+      </button>
+      <button class="level-card" data-level="hard">
+        <strong>Hard</strong>
+        <span>Fast enemy waves and stronger assaults.</span>
+      </button>
+    </div>
+    <div class="menu-actions">
+      <button id="btn-level-back" class="btn btn-ghost">Back</button>
+    </div>
+  </div>
+</div>
+
+<div class="scene" id="scene-gameplay">
+  <div class="game-shell">
+    <header class="hud-top">
+      <div class="base-hp-group">
+        <span class="label">Player Base</span>
+        <div class="hp-track">
+          <div id="player-base-hp-fill" class="hp-fill player"></div>
+        </div>
+        <span id="player-base-hp-text" class="value">100%</span>
+      </div>
+
+      <div class="energy-group">
+        <span class="label">Energy</span>
+        <div class="energy-track">
+          <div id="energy-fill" class="energy-fill"></div>
+          <div class="energy-glow"></div>
+        </div>
+        <span id="energy-text" class="value">0 / 100</span>
+      </div>
+
+      <div class="base-hp-group">
+        <span class="label">Enemy Base</span>
+        <div class="hp-track">
+          <div id="enemy-base-hp-fill" class="hp-fill enemy"></div>
+        </div>
+        <span id="enemy-base-hp-text" class="value">100%</span>
+      </div>
+    </header>
+
+    <section class="canvas-wrap">
+      <canvas id="game-canvas" width="1280" height="540" aria-label="Game canvas"></canvas>
+      <div class="level-chip" id="level-chip">Level: Easy</div>
+    </section>
+
+    <footer class="hud-bottom">
+      <div id="unit-buttons" class="unit-buttons"></div>
+      <button id="btn-game-menu" class="btn btn-ghost small">Back To Menu</button>
+    </footer>
+  </div>
+</div>
+
+<div class="scene" id="scene-gameover">
+  <div class="panel gameover-panel">
+    <h2 id="gameover-title">Victory</h2>
+    <p id="gameover-subtitle">Your base survived the assault.</p>
+    <div class="menu-actions">
+      <button id="btn-restart" class="btn btn-primary">Restart</button>
+      <button id="btn-back-lobby" class="btn btn-secondary">Back To Menu</button>
+    </div>
+  </div>
+</div>
+</div> <script src="game.js"></script> </body> </html>

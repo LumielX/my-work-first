@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Neon Rangers - Tower Defense</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app">
+        <div id="scene-lobby" class="scene active">
+            <div class="panel">
+                <h1 class="game-title">NEON RANGERS</h1>
+                <p class="subtitle">Defend your core. Destroy the enemy.</p>
+                <button class="btn primary-btn" onclick="sceneManager.switchScene('scene-levels')">PLAY GAME</button>
+            </div>
+        </div>
+
+        <div id="scene-levels" class="scene">
+            <div class="panel">
+                <h2>SELECT DIFFICULTY</h2>
+                <div class="level-grid">
+                    <button class="btn level-btn" onclick="startGame('easy')">EASY</button>
+                    <button class="btn level-btn" onclick="startGame('medium')">MEDIUM</button>
+                    <button class="btn level-btn" onclick="startGame('hard')">HARD</button>
+                </div>
+                <button class="btn secondary-btn" onclick="sceneManager.switchScene('scene-lobby')">BACK</button>
+            </div>
+        </div>
+
+        <div id="scene-game" class="scene">
+            <div id="canvas-container">
+                <canvas id="gameCanvas" width="800" height="400"></canvas>
+                
+                <div id="ui-layer">
+                    <div class="top-bar">
+                        <div class="base-status player-status">
+                            <div class="hp-bar-container"><div id="player-hp-bar" class="hp-bar-fill"></div></div>
+                            <span id="player-hp-text">1000/1000</span>
+                        </div>
+                        <div class="base-status enemy-status">
+                            <div class="hp-bar-container"><div id="enemy-hp-bar" class="hp-bar-fill"></div></div>
+                            <span id="enemy-hp-text">1000/1000</span>
+                        </div>
+                    </div>
+
+                    <div class="bottom-bar">
+                        <div class="energy-container">
+                            <div class="energy-text">ENERGY: <span id="energy-val">0</span> / 100</div>
+                            <div class="energy-bar-bg"><div id="energy-bar" class="energy-bar-fill"></div></div>
+                        </div>
+                        <div class="unit-buttons">
+                            <div id="unit-roster"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="scene-gameover" class="scene">
+            <div class="panel">
+                <h1 id="gameover-title">VICTORY</h1>
+                <p id="gameover-stats">You destroyed the enemy core!</p>
+                <button class="btn primary-btn" onclick="sceneManager.switchScene('scene-lobby')">MAIN MENU</button>
+                <button class="btn secondary-btn" onclick="sceneManager.switchScene('scene-levels')">PLAY AGAIN</button>
+            </div>
+        </div>
+    </div>
+    <script src="game.js"></script>
+</body>
+</html>
