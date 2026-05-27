@@ -5,13 +5,13 @@ import pandas as pd
 from paho.mqtt import client as mqtt_client
 
 # TODO: UPDATE PATH CSV_FILE IN HERE --- r"/Synthetic-Data Path "
-File_csv_Path = r"C:\Users\ASUS\Downloads\CodeKubbb\tammada\idekteppp\academy_alpha-i-week2\Data\synthetic_plant_train.csv"
+File_csv_Path = r"C:\CodeKubbb\Idekteppp\academy_alpha-i-week2\Data\synthetic_plant_train.csv"
 
 # NOTE: MQTT Configuration
 MQTT_CONFIG = {
-    "BROKER" : 'broker.emqx.io',
+    "BROKER" : '192.168.16.10',
     "PORT"   : 1883,
-    "TOPIC": "plant/env/predicted",
+    "TOPIC": "ptfa/envi/train",
     "CLIENT_ID" : f'ALPHA-I-{random.randint(0,100)}'
 }
 
@@ -38,9 +38,9 @@ def publisher(PUBLISH_INTERVAL_SEC= 0.5):
             result = client.publish(MQTT_CONFIG["TOPIC"], payload)
             status = result[0]
             if status == 0:
-                print(f"[{idx}] Published to {MQTT_CONFIG["TOPIC"]}: {payload}")
+                print(f"[{idx}] Published to {MQTT_CONFIG['TOPIC']}: {payload}")
             else:
-                print(f"[{idx}] Failed to send message to {MQTT_CONFIG["TOPIC"]}")
+                print(f"[{idx}] Failed to send message to {MQTT_CONFIG['TOPIC']}")
 
             time.sleep(PUBLISH_INTERVAL_SEC)
 

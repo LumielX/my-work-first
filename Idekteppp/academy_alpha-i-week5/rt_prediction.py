@@ -5,14 +5,14 @@ import paho.mqtt.client as mqtt
 import numpy as np
 from xgboost import XGBClassifier
 
-BROKER_HOST = "broker.emqx.io"
+BROKER_HOST = ""
 BROKER_PORT = 1883
 
-TOPIC_IN = "plant/env/raw"
-TOPIC_OUT = "plant/env/predicted"
+TOPIC_IN = ""
+TOPIC_OUT = ""
 
-MODEL_PATH = r"C:\Users\ASUS\Downloads\CodeKubbb\Idekteppp\academy_alpha-i-week4\data\xgb_plant_model.json"
-OUTPUT_CSV = "predicted_result_1.csv"
+MODEL_PATH = r""
+OUTPUT_CSV = ""
 
 label_map = {0: "normal", 1: "alert", 2: "alarm"}
 
